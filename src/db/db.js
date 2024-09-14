@@ -1,19 +1,9 @@
-import logger from '../logger.js'
+import knex from 'knex'
 
-let id = 0
-
-async function insert() {
-  return new Promise((resolve) => {
-    let insertId = ++id
-    logger.info({ id: insertId }, 'start insert')
-
-    setTimeout(() => {
-      logger.info({ id: insertId }, 'resolved')
-      resolve()
-    }, 5_000)
-  })
-}
-
-export const db = {
-  insert,
-}
+export const db = knex({
+  client: 'pg',
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+  },
+  // pool: { min: 0, max: 7 },
+})
