@@ -16,9 +16,6 @@ app.get('/simulate-item', async (req, res) => {
 })
 
 app.get('/db', async (req, res) => {
-  // const result = await db.select().table('playing_with_neon')
-  // console.log(result)
-
   // pretend we have slow transactions
   try {
     await db.transaction(async (trx) => {
@@ -26,6 +23,8 @@ app.get('/db', async (req, res) => {
       const result = await db('playing_with_neon').where('id', '=', 1)
       console.log(result)
     })
+
+    // await sleep(2_000)
 
     return res.status(200).json({ success: true })
   } catch (err) {

@@ -5,5 +5,6 @@ export const db = knex({
   connection: {
     connectionString: process.env.DATABASE_URL,
   },
-  // pool: { min: 0, max: 7 },
+  acquireConnectionTimeout: 1_000,
+  pool: { min: 0, max: 2 },
 })
