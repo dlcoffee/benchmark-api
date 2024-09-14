@@ -1,9 +1,14 @@
 import express from 'express'
+import logger from 'pino-http'
+import { db } from './db/db.js'
 
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
+app.use(logger())
+
+app.get('/', async (req, res) => {
+  await db.insert()
   res.status(200).json({ success: true })
 })
 
